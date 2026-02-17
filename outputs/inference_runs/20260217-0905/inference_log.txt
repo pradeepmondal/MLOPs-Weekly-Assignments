@@ -1,0 +1,1 @@
+Inference Accuracy: 0.8888888888888888 for the inference run at 20260217-0905 using the model at gs://mlops-assignment-mlops-iitmadras-mainrun/train_runs/20260217-0902/
