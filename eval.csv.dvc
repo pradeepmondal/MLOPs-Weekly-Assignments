@@ -1,0 +1,13 @@
+md5: 50ba3944474c21c3ca8136769b3ccda9
+frozen: true
+deps:
+- etag: 088b89a6c093e092031001
+  size: 1310
+  version_id: '1771318467462283'
+  hash: md5
+  path: gs://mlops-assignment-mlops-iitmadras-mainrun/data/v2/data.csv
+outs:
+- md5: 95d8300fe0c84c4814f4dd187f7b1627
+  size: 1310
+  hash: md5
+  path: eval.csv
