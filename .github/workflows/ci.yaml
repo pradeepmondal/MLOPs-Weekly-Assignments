@@ -1,0 +1,57 @@
+name: Continuous Integration
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+  
+on:
+  push:
+  pull_request:
+
+jobs:
+  test-and-report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+      - name: Pull Data and Models via DVC
+        run: dvc pull
+
+      - name: Setup CML
+        uses: iterative/setup-cml@v2
+        
+      - name: Run Pytest and Generate CML Report
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Run tests and output to markdown
+          pytest tests/ --md report.md
+          
+          # Append the metrics we saved in test_model.py
+          echo "## Model Evaluation Results" >> report.md
+          cat metrics.txt >> report.md
+          
+      - name: Publish CML comment on PR
+        if: >
+          github.event_name == 'pull_request' &&
+          github.event.pull_request.head.repo.full_name == github.repository
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cml comment create report.md
+
