@@ -9,8 +9,17 @@ import logging
 
 logging.getLogger("mlflow").setLevel(logging.ERROR)
 
-# Set the MLflow tracking experiment
-mlflow.set_experiment("Iris_DecisionTree_Hyperopt")
+mlflow.set_tracking_uri("sqlite:///mlflow.db")
+
+experiment_name = "Iris_DecisionTree_Hyperopt"
+
+if not mlflow.get_experiment_by_name(experiment_name):
+    mlflow.create_experiment(
+        name=experiment_name,
+        artifact_location="./mlruns"
+    )
+
+mlflow.set_experiment(experiment_name)
 
 # Load data
 df = pd.read_csv('data/data.csv')

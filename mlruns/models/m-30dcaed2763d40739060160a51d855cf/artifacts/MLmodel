@@ -1,0 +1,23 @@
+artifact_path: /home/cloud_pradeepmondal/week_5/mlruns/models/m-30dcaed2763d40739060160a51d855cf/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.12.3
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.8.0
+    skops_trusted_types: null
+mlflow_version: 3.10.1
+model_id: m-30dcaed2763d40739060160a51d855cf
+model_size_bytes: 2627
+model_uuid: m-30dcaed2763d40739060160a51d855cf
+prompts: null
+run_id: ec9b2a8727ce4edaa0651ed772b9e432
+utc_time_created: '2026-03-20 11:07:58.024591'

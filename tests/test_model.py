@@ -13,10 +13,7 @@ def eval_data():
 
 @pytest.fixture
 def model():
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    project_root = os.path.dirname(current_dir)
-    db_path = os.path.join(project_root, "mlflow.db")
-    mlflow.set_tracking_uri(f"sqlite:///{db_path}")
+    mlflow.set_tracking_uri("sqlite:///mlflow.db")
     return mlflow.sklearn.load_model(MODEL_URI)
 
 def test_model_performance(eval_data, model):
