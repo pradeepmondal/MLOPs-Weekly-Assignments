@@ -8,3 +8,5 @@ pytest-md
 mlflow==3.10.1
 hyperopt
 setuptools
+google-cloud-storage
+gcsfs

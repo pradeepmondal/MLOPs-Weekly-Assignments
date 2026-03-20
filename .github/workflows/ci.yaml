@@ -19,7 +19,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.12.3'
+          python-version: '3.11.2'
 
       - name: Install Dependencies
         run: pip install -r requirements.txt
@@ -38,6 +38,7 @@ jobs:
       - name: Run Pytest and Generate CML Report
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GOOGLE_CLOUD_PROJECT: "mlops-iitmadras"
         run: |
           # Run tests and output to markdown
           pytest tests/ --md report.md

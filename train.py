@@ -11,13 +11,12 @@ logging.getLogger("mlflow").setLevel(logging.ERROR)
 
 mlflow.set_tracking_uri("sqlite:///mlflow.db")
 
+GCS_ARTIFACT_PATH = "gs://mlflow-test-mlops-iitmadras/mlflow-artifacts"
+
 experiment_name = "Iris_DecisionTree_Hyperopt"
 
 if not mlflow.get_experiment_by_name(experiment_name):
-    mlflow.create_experiment(
-        name=experiment_name,
-        artifact_location="./mlruns"
-    )
+    mlflow.create_experiment(name=experiment_name, artifact_location=GCS_ARTIFACT_PATH)
 
 mlflow.set_experiment(experiment_name)
 
