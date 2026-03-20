@@ -1,3 +1,4 @@
+setuptools<82.0.0
 pandas
 numpy
 scikit-learn
@@ -5,3 +6,5 @@ joblib
 dvc[gs]
 pytest
 pytest-md
+mlflow
+hyperopt
