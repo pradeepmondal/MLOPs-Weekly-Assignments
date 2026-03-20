@@ -2,9 +2,9 @@ import pandas as pd
 import pytest
 import mlflow.sklearn
 from sklearn.metrics import accuracy_score
+import os
 
-EVAL_PATH = "eval.csv"
-
+EVAL_PATH = "data/eval.csv"
 MODEL_URI = "models:/Iris-DecisionTree/latest"
 
 @pytest.fixture
@@ -13,7 +13,10 @@ def eval_data():
 
 @pytest.fixture
 def model():
-    # Load model from MLflow Registry
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(current_dir)
+    db_path = os.path.join(project_root, "mlflow.db")
+    mlflow.set_tracking_uri(f"sqlite:///{db_path}")
     return mlflow.sklearn.load_model(MODEL_URI)
 
 def test_model_performance(eval_data, model):
