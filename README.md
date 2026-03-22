@@ -1,11 +1,16 @@
 # 21F2000709_MLOPS_WEEKLY_ASSIGNMENT
 
-Week 5 Assignment
+Week 6 Assignment
 
 Objective:
-Integrating MLFlow into the IRIS Pipeline
+Integrating Continuous Deployment into the IRIS Pipeline
 
 Utility of each file:
+- api.py - contains the FastAPI app code for serving the model
+- Dockerfile - contains the instructions for building and running the Docker Image
+- .github/workflows/deploy.yaml - contains the code for deploying the api as image to the gke
+- k8s/service.yaml - contains the service configurations for gke service
+- k8s/deployment.yaml - contains the deployment configurations for gke deployment
 - tests/test_data.py - tests for validating the datasets
 - tests/test_model.py - tests for model evaluation
 - train.py - python file containing the code for training the DecisionTreeClassifier model as well as integration of mlflow for logging and registering models
