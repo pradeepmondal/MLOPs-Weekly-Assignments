@@ -10,3 +10,6 @@ hyperopt
 setuptools
 google-cloud-storage
 gcsfs
+fastapi
+uvicorn
+pydantic
