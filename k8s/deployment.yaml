@@ -12,9 +12,35 @@ spec:
       labels:
         app: iris-api
     spec:
+      serviceAccountName: telemetry-access
       containers:
       - name: iris-api
         # just a placeholder, actual image will be set byGitHub Actions
         image: iris-api-image-placeholder 
         ports:
         - containerPort: 8000
+
+        # add readiness and liveness probes
+        readinessProbe:
+          httpGet:
+            path: /ready_check
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /live_check
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 15
+
+        # add resource limits
+        resources:
+          requests:
+            cpu: "100m"      # Baseline: 10% of a CPU core
+            memory: "128Mi"
+          limits:
+            cpu: "500m"      # Max allowed: 50% of a CPU core
+            memory: "256Mi"
+        
+

@@ -1,9 +1,9 @@
-name: Build, Push, and Deploy IRIS API
+name: Build, Push, Deploy and Stress Test IRIS API
 
 on:
   push:
     branches:
-      - week_6
+      - week_7
 
 env:
   PROJECT_ID: mlops-iitmadras       
@@ -67,3 +67,21 @@ jobs:
         
         # Wait for the rollout to finish
         kubectl rollout status deployment/iris-api-deployment
+
+    # Apply Stress Test Job
+    - name: Install wrk
+      run: sudo apt-get update && sudo apt-get install -y wrk
+
+    - name: Wait for LoadBalancer IP and Run Stress Test
+      run: |
+        # Wait until the External IP is provisioned by GCP
+        echo "Waiting for External IP..."
+        while [ -z "$EXTERNAL_IP" ]; do
+          EXTERNAL_IP=$(kubectl get svc iris-api-service -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+          [ -z "$EXTERNAL_IP" ] && sleep 10
+        done
+        echo "API is live at: http://$EXTERNAL_IP"
+        
+        # Run wrk with 1000 connections using the Lua script
+        echo "Starting Stress Test..."
+        wrk -t4 -c1000 -d30s -s post.lua http://$EXTERNAL_IP/predict
