@@ -1,14 +1,15 @@
 # 21F2000709_MLOPS_WEEKLY_ASSIGNMENT
 
-Week 6 Assignment
+Week 7 Assignment
 
 Objective:
-Integrating Continuous Deployment into the IRIS Pipeline
+Integrating Stress Testing, Observability & Scaling the IRIS Pipeline
 
 Utility of each file:
-- api.py - contains the FastAPI app code for serving the model
+- api.py - contains the FastAPI app code along with code for logging and tracing
 - Dockerfile - contains the instructions for building and running the Docker Image
 - .github/workflows/deploy.yaml - contains the code for deploying the api as image to the gke
+- k8s/hpa.yaml - contains the horiziontal pod autoscaler configurations
 - k8s/service.yaml - contains the service configurations for gke service
 - k8s/deployment.yaml - contains the deployment configurations for gke deployment
 - tests/test_data.py - tests for validating the datasets
@@ -21,3 +22,4 @@ Utility of each file:
 - .dvc [Folder] - contains required files including configuartion files required by DVC
 - .dvcignore - tells DVC which files/folder to ignore
 - .gitignore - tells Git which files/folder to ignore
+- post.lua - contains the lua script to change the wrk's behaviour
