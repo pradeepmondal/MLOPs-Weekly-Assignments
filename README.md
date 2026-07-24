@@ -1,4 +1,4 @@
-# 21F2000709 MLOps Weekly Assignments
+# MLOps Weekly Assignments
 
 This repository tracks week-wise progress for building and scaling an IRIS ML pipeline across MLOps stages.
 
